@@ -1,0 +1,14 @@
+--- 
+applications: 
+  .: 
+    mem: 64M
+    url: ${name}.${target-base}
+    framework: 
+      info: 
+        mem: 64M
+        description: Node.js Application
+        exec: 
+      name: node
+    infra: ap-aws
+    instances: 1
+    name: andrew-beng-2010
