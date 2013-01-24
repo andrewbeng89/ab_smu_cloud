@@ -2,8 +2,9 @@ var module = angular.module('myApp', []);
 
 function TodoCtrl($scope, $http) {
 	
-	$http.get('/todos').success(function(data) {
-		$scope.todos = data;
+	$http.jsonp('/todos?callback=JSON_CALLBACK')
+		.success(function(data) {
+			$scope.todos = angular.fromJson(data);
 	});
 	
 	/*$scope.todos = [{
