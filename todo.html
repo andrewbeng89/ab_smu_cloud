@@ -1,0 +1,54 @@
+<!doctype html>
+<!-- You need to add ng-app to the html tag to get angluar to handle the page. -->
+<html ng-app="myApp">
+  <header>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.js"></script>
+    <script src="http://underscorejs.org/underscore-min.js"></script>
+    <script language="javascript" type="text/javascript">
+      //You need to add myApp to a module and provide access to any needed services.
+      angular.module('myApp', []);
+      
+      function ToDoCtrl($scope) {
+        $scope.todos = [];
+        
+        $scope.addTodo = function() {
+          var newTodo = {
+            text:$scope.newTodo,
+            done:false
+          }
+          $scope.todos.push(newTodo);
+          $scope.newTodo = "";
+          
+        }
+        
+        $scope.removeTodo = function() {
+          $scope.todos = _.filter($scope.todos, function(todo) {
+  		      return !todo.done;
+		      });
+	      }
+        
+    }
+      
+    </script>
+  </header>
+  
+  <body ng-controller="ToDoCtrl">
+    <input type="text" ng-model="newTodo">
+    <input type="submit" ng-click="addTodo()" value="Add Todo">
+    </input>
+    <ul>
+      <li ng-repeat="todo in todos">
+      {{todo.text}}
+      <input type="checkbox" ng-model="todo.done">
+      </li>
+    </ul>
+    <input type="submit" ng-click="removeTodo()" value="Clear Todos">
+    <p>
+    Simple ToDo application hosted on AppFog with express node js backend <a href="http://andrew-beng-2010.ap01.aws.af.cm/app/">here</a>
+    </p>
+    <p>View on GitHub <a href="https://github.com/andrewbeng89/ab_smu_cloud/tree/master/andrew-beng-2010">here</a><p>
+    <p>Thanks to <a href="http://www.youtube.com/watch?feature=player_embedded&v=uFTFsKmkQnQ">this</a> youtube tutorial for the basic todo app</p>
+    <iframe width="560" height="315" src="http://www.youtube.com/embed/WuiHuZq_cg4" frameborder="0" allowfullscreen></iframe>
+  </body>
+
+</html>
