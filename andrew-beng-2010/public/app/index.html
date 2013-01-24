@@ -93,19 +93,22 @@
 			<!-- Main hero unit for a primary marketing message or call to action -->
 			<div class="hero-unit" ng-controller="TodoCtrl">
 				<h1>Andrew's Simple ToDo App!</h1>
+
 				<h2>Total todos: {{getTotalTodos()}}</h2>
-				<ul class="unstyled">
-					<li ng-repeat="todo in todos">
-						<input type="checkbox" ng-model="todo.done">
-						<span class="done-{{todo.done}}">{{todo.text}}</span>
-					</li>
-				</ul>
+
 				<form class="form-horizontal">
 					<input type="text" ng-model="formTodoText" ng-model-instant>
 					<button class="btn" ng-click="addTodo()">
 						<i class="icon-plus"></i>Add
 					</button>
 				</form>
+
+				<ul class="unstyled">
+					<li ng-repeat="todo in todos">
+						<input type="checkbox" ng-model="todo.done">
+						<span class="done-{{todo.done}}">{{todo.text}}</span>
+					</li>
+				</ul>
 
 				<p>
 					<button class="btn-large" ng-click="clearCompleted()">
@@ -172,7 +175,8 @@
 		<script src="js/main.js"></script>
 
 		<script>
-			var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview']]; ( function(d, t) {
+			var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview']];
+			( function(d, t) {
 					var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
 					g.src = ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js';
 					s.parentNode.insertBefore(g, s)
