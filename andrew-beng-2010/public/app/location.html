@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -15,6 +14,7 @@
 		<script src="http://code.angularjs.org/1.0.2/angular.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular-resource.min.js"></script>
 		<script src="http://underscorejs.org/underscore-min.js"></script>
+		<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 		<script type="text/javascript" src="js/todo.js"></script>
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<style>
@@ -93,34 +93,20 @@
 
 			<!-- Main hero unit for a primary marketing message or call to action -->
 			<div class="hero-unit" ng-controller="TodoCtrl">
-				<h1>Andrew's Simple ToDo App!</h1>
-
-				<h2>Total todos: {{getTotalTodos()}}</h2>
-
+				<h2>Search for places nearby...</h2>
+				<h4> Please enter a type, e.g. "food", and hit the button!</h4>
 				<form class="form-horizontal">
-					<input type="text" ng-model="formTodoText" ng-model-instant>
-					<button class="btn" ng-click="addTodo()">
-						<i class="icon-plus"></i>Add
+					<input type="text" ng-model="placesType" ng-model-instant>
+					<button class="btn-large" ng-click="get_location()">
+						Get Places
 					</button>
 				</form>
-
-				<ul class="unstyled">
-					<li ng-repeat="todo in todos">
-						<input type="checkbox" ng-model="todo.done">
-						<span class="done-{{todo.done}}">{{todo.text}}</span>
-					</li>
-				</ul>
-
 				<p>
-					<button class="btn-large" ng-click="clearCompleted()">
-						<i class="icon-trash"></i>Clear Completed
-					</button>
+					{{placesResultMessage}}
 				</p>
+
 				<p>
 					<a class="btn btn-primary btn-large">View on GitHub &raquo;</a>
-				</p>
-				<p>
-					Thanks to <a href="http://www.youtube.com/watch?feature=player_embedded&v=uFTFsKmkQnQ">this</a> youtube tutorial for the basic todo app
 				</p>
 			</div>
 
@@ -176,8 +162,7 @@
 		<script src="js/main.js"></script>
 
 		<script>
-			var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview']];
-			( function(d, t) {
+			var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview']]; ( function(d, t) {
 					var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
 					g.src = ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js';
 					s.parentNode.insertBefore(g, s)
