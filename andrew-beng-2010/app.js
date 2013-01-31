@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 
-var express = require('express'), routes = require('./routes'), user = require('./routes/user'), http = require('http'), path = require('path'), url = require('url'), https = require('https');
+var express = require('express'), routes = require('./routes'), user = require('./routes/user'), http = require('http'), path = require('path'), url = require('url'), https = require('https'), ytdl = require('ytdl');
 
 var app = express();
 
@@ -37,6 +37,17 @@ app.post('/create/todo', function(req, res) {
 	newTodo.save();
 	console.log(req.body);
 	res.send(req.body);
+});
+
+app.get('/youtube', function(req, res) {
+	var _get = url.parse(req.url, true).query;
+	var yturl = _get['yturl'];
+	ytdl.getInfo(yturl, function(err, info) {
+		if (!err) {
+			res.json({yturl:info.formats[8].url});
+			//res.json(info);
+		}
+	});
 });
 
 app.get('/todos', function(req, res) {
