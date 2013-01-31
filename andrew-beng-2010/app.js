@@ -39,6 +39,14 @@ app.post('/create/todo', function(req, res) {
 	res.send(req.body);
 });
 
+app.post('/youtube/getlink', function(req, res) {
+	var body = req.body.body;
+	ytdl.getInfoFromBody(body, function(err, info) {
+		res.json({yturl:info.formats[8].url});
+	});
+	//res.json({yturl:body});
+});
+
 app.get('/youtube', function(req, res) {
 	var _get = url.parse(req.url, true).query;
 	var yturl = _get['yturl'];
